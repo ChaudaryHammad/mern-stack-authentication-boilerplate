@@ -1,7 +1,8 @@
 import bcryptjs from "bcryptjs"
 import { User } from "../models/user.model.js"
 import generateJwtTokenAndSetCookie from "../utils/generateJwtTokenAndSetCookie.js"
-
+import sendEmail from "../utils/sendEmail.js"
+import generateEmailTemplate from '../utils/generateEmailTemplate.js';
 export const signup = async(req,res)=>{
     const {name,email,password} = req.body
     try {
@@ -33,7 +34,20 @@ export const signup = async(req,res)=>{
         })
 
         await user.save()
-        
+
+        const htmlMessage = generateEmailTemplate('verification', {
+            name: user.name,
+            token: verificationToken
+        });
+
+        await sendEmail({
+            email: user.email,
+            subject: 'Email Verification',
+            message: `Your verification code is ${verificationToken}. Please use this code to verify your account.`, // Text content
+            html: htmlMessage // HTML content
+        });
+
+
       
         generateJwtTokenAndSetCookie(res,user._id)
         res.status(201).json({
