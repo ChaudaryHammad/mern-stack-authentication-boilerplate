@@ -9,7 +9,7 @@ const generateEmailTemplate = (type, data) => {
                     <h3 style="color: #4CAF50;">${data.token}</h3>
                     <p>If you did not sign up for this account, please ignore this email.</p>
                     <p>Best regards,</p>
-                    <p>RUNO Dev Team</p>
+                    <p>RUNO</p>
                     <hr />
                     <footer style="text-align: center; font-size: 12px; color: #aaa;">
                         <p>&copy; ${new Date().getFullYear()} RUNO. All rights reserved.</p>
@@ -17,7 +17,22 @@ const generateEmailTemplate = (type, data) => {
                     </footer>
                 </div>
             `;
-        // Add other cases for different email types
+        case 'Welcome':
+            return `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <h2 style="background-color: #f2f2f2; padding: 10px;">Welcome to RUNO </h2>
+                    <p>Hi ${data.name},</p>
+                    <p>Thank you for signing up. Your account has been successfully verified against email ${data.email}</p>
+                    <p>We are excited to have you on board.</p>
+                    <p>Best regards,</p>
+                    <p>RUNO</p>
+                    <hr />
+                    <footer style="text-align: center; font-size: 12px; color: #aaa;">
+                        <p>&copy; ${new Date().getFullYear()} RUNO. All rights reserved.</p>
+                        <p>Runo developers, Lahore, Punjab, Pakistan</p>
+                    </footer>
+                </div>
+            `;
         default:
             return '<div>Hello</div>';
     }
