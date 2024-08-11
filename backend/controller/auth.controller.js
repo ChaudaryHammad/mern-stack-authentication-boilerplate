@@ -1,9 +1,8 @@
 import bcryptjs from "bcryptjs"
-import { User } from "../models/user.model.js"
 import generateJwtTokenAndSetCookie from "../utils/generateJwtTokenAndSetCookie.js"
-import sendEmail from "../utils/sendEmail.js"
-import generateEmailTemplate from '../utils/generateEmailTemplate.js';
-
+import { sendSignUpEmail, sendVerificationEmail, sendPasswordResetEmail } from "../utils/Emails/VerificationEmail.js"
+import crypto from 'crypto'
+import { User } from "../models/user.model.js"
 
 
 
@@ -40,17 +39,7 @@ export const signup = async(req,res)=>{
 
         await user.save()
 
-        const htmlMessage = generateEmailTemplate('verification', {
-            name: user.name,
-            token: verificationToken
-        });
-
-        await sendEmail({
-            email: user.email,
-            subject: 'Email Verification',
-            message: `Your verification code is ${verificationToken}. Please use this code to verify your account.`, // Text content
-            html: htmlMessage // HTML content
-        });
+        sendSignUpEmail(user.name,user.email,verificationToken)
 
 
       
@@ -80,14 +69,14 @@ export const signup = async(req,res)=>{
 
 export const verifyEmail = async(req,res)=>{
     const {code} = req.body;
-    console.log(code)
+   
     try {
         const user = await User.findOne({
             verificationToken:code,
             verificationTokenExpiresAt:{$gt:Date.now()}
           
         })
-        console.log(user);
+      
         if(!user){
             return res.status(400).json({
                 success:false,
@@ -101,20 +90,7 @@ export const verifyEmail = async(req,res)=>{
         user.verificationTokenExpiresAt=undefined;
 
         await user.save()
-
-        const generateHtmlMessage = generateEmailTemplate('Welcome',{
-            name:user.name,
-            email:user.email
-
-        })
-
-        await sendEmail({
-            email:user.email,
-            subject:'Welcome',
-            message:'Welcome to RUNO',
-            html:generateHtmlMessage
-        })
-
+        sendVerificationEmail(user.name,user.email)
 
         res.status(200).json({
             success:true,
@@ -228,3 +204,39 @@ export const logout = async (req, res) => {
         });
     }
 };
+
+
+export const forgotPassword = async(req,res)=>{
+    const {email} = req.body;
+    try {
+        const user = await User.findOne({email})
+        if(!user){
+            return res.status(400).json({
+                success:false,
+                message:'User not Found'
+            })
+        }
+
+        const resetToken = crypto.randomBytes(20).toString('hex')
+        const resetTokenExpiresAt = Date.now() + 1 *60*60*1000
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpiresAt = resetTokenExpiresAt;
+
+        await user.save()
+
+        sendPasswordResetEmail(user.name,user.email,`${process.env.Client_URL}/reset-passsword/${resetToken}`)
+
+        res.status(200).json({
+            success:true,
+            message:'reset password link is emailed'
+        })
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+            error: error.message,
+        });
+        
+    }
+}
