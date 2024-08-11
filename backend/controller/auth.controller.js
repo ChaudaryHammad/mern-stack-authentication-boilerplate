@@ -1,6 +1,6 @@
 import bcryptjs from "bcryptjs"
 import generateJwtTokenAndSetCookie from "../utils/generateJwtTokenAndSetCookie.js"
-import { sendSignUpEmail, sendVerificationEmail, sendPasswordResetEmail } from "../utils/Emails/VerificationEmail.js"
+import { sendSignUpEmail, sendVerificationEmail, sendPasswordResetEmail, sendPasswordResetSuccessFull } from "../utils/Emails/VerificationEmail.js"
 import crypto from 'crypto'
 import { User } from "../models/user.model.js"
 
@@ -239,4 +239,52 @@ export const forgotPassword = async(req,res)=>{
         });
         
     }
+}
+
+
+export const resetPassword = async(req,res)=>{
+
+    const {token} = req.params
+    const {password} = req.body
+
+    try {
+
+        const user = await User.findOne({
+            resetPasswordToken:token,
+           resetPasswordExpiresAt:{$gt:Date.now()}
+        })
+
+        if(!user){
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid or Expired token',
+            }); 
+        }
+
+        const hashPasword = await bcryptjs.hash(password,10)
+
+
+        user.password = hashPasword
+        user.resetPasswordToken = undefined
+        user.resetPasswordExpiresAt=undefined
+
+        await user.save()
+
+        sendPasswordResetSuccessFull(user.name,user.email)
+        res.status(200).json({
+            success: true,
+            message: 'Password updated successfully',
+        });
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+            error: error.message,
+        });
+    
+    }
+
+
+
 }

@@ -50,6 +50,24 @@ const generateEmailTemplate = (type, data) => {
                         </footer>
                     </div>
                 `;
+        case "Reset Success":
+            return `
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <h2 style="background-color: #f2f2f2; padding: 10px;">Password reset Success(RUNO)</h2>
+                <p>Hi ${data.name},</p>
+                <p>Your password has been updated successfully</p>
+               
+                <p>If you did not make this request for this account, please ignore this email.</p>
+                <p>Best regards,</p>
+                <p>RUNO</p>
+                <hr />
+                <footer style="text-align: center; font-size: 12px; color: #aaa;">
+                    <p>&copy; ${new Date().getFullYear()} RUNO. All rights reserved.</p>
+                    <p>Runo developers, Lahore, Punjab, Pakistan</p>
+                </footer>
+            </div>
+        `;
+
             
         default:
             return '<div>Hello</div>';

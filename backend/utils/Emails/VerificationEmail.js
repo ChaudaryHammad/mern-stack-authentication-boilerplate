@@ -35,7 +35,7 @@ export const sendVerificationEmail=async(name,email)=>{
 
 
 export const  sendPasswordResetEmail = async(name,email,url)=>{
-    console.log(url);
+   
     const resetMessage = generateEmailTemplate('Reset',{
         name,
         email,
@@ -51,4 +51,21 @@ export const  sendPasswordResetEmail = async(name,email,url)=>{
     })
 
 
+}
+
+
+
+export const sendPasswordResetSuccessFull= async(name,email)=>{
+    const successMessage = generateEmailTemplate('Reset Success',{
+        name,
+        email
+
+    })
+
+    await sendEmail({
+        email,
+        subject:'Reset Successfull',
+        message:'Welcome to RUNO',
+        html:successMessage
+    })
 }
