@@ -58,7 +58,7 @@ npm run dev
 │   ├── routes/
 │   │   └── auth.route.js
 │   └── utils/
-│       ├── Emails/
+│       ├── emails/
 │       │   ├── generateEmailTemplate.js
 │       │   └── transporter.js
 │       ├── generateJwtTokenAndSetCookie.js

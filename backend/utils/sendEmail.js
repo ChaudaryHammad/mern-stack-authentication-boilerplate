@@ -1,5 +1,5 @@
-import generateEmailTemplate from "./Emails/generateEmailTemplate.js";
-import transporter from "./Emails/transporter.js";
+import generateEmailTemplate from "./emails/generateEmailTemplate.js";
+import transporter from "./emails/transporter.js";
 
 export const sendSignUpEmail = async (name, email, token) => {
   const signUpMessage = generateEmailTemplate("signup", {
