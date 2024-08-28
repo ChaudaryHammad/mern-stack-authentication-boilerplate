@@ -22,9 +22,7 @@
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
-- [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -62,10 +60,9 @@ npm run dev
 │   └── utils/
 │       ├── Emails/
 │       │   ├── generateEmailTemplate.js
-│       │   ├── transporter.js
+│       │   └── transporter.js
 │       ├── generateJwtTokenAndSetCookie.js
-│       ├── sendEmail.js
-│       └── index.js
+│       └── sendEmail.js
 └── index.js
 ```
 ## Configuration
@@ -83,6 +80,13 @@ FROM_NAME=<YOUR_NAME_OR_APP_NAME>
 FROM_EMAIL=<YOUR_EMAIL>
 Client_URI=http://localhost:3000
 ```
+
+## Contributing
+- Fork the repository
+- Create a new branch: git checkout -b my-feature-branch
+- Commit your changes: git commit -m 'Add new feature'
+- Push to the branch: git push origin my-feature-branch
+- Create a pull request
 
 
 
