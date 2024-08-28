@@ -32,3 +32,57 @@ To install this package, use npm:
 
 ```bash
 npm install auth
+```
+## Usage
+
+After installation, you can start the server using:
+```bash
+npm start
+```
+Or, to start the server in development mode with Nodemon:
+```bash
+npm run dev
+```
+
+## Project Structure
+```bash
+├── backend/
+│   ├── config/
+│   │   └── .env
+│   ├── controller/
+│   │   └── auth.controller.js
+│   ├── database/
+│   │   └── connection.js
+│   ├── middleware/
+│   │   └── isAuthenticated.js
+│   ├── models/
+│   │   └── user.model.js
+│   ├── routes/
+│   │   └── auth.route.js
+│   └── utils/
+│       ├── Emails/
+│       │   ├── generateEmailTemplate.js
+│       │   ├── transporter.js
+│       ├── generateJwtTokenAndSetCookie.js
+│       ├── sendEmail.js
+│       └── index.js
+└── index.js
+```
+## Configuration
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER>.mongodb.net/<DATABASE>
+JWT_SECRET=<YOUR_JWT_SECRET>
+JWT_EXPIRES_IN=7d
+NODE_ENV=development
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_EMAIL=<YOUR_SMTP_EMAIL>
+SMTP_PASSWORD=<YOUR_SMTP_PASSWORD>
+FROM_NAME=<YOUR_NAME_OR_APP_NAME>
+FROM_EMAIL=<YOUR_EMAIL>
+Client_URI=http://localhost:3000
+```
+
+
+
