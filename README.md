@@ -29,7 +29,7 @@
 To install this package, use npm:
 
 ```bash
-npm install auth
+npm install mern-auth-boilerplate
 ```
 ## Usage
 

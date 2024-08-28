@@ -1,12 +1,12 @@
 {
-  "name": "auth",
+  "name": "mern-auth-boilerplate",
   "version": "1.0.0",
   "description": "A full-stack authentication boilerplate with email verification support for Node.js applications.",
   "main": "index.js",
   "scripts": {
     "start": "node backend/index.js",
     "dev": "nodemon backend/index.js",
-     "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
   "author": "Muhmmad Hammad",
@@ -34,7 +34,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChaudaryHammad/mern-stack-authentication-boilerplate"
+    "url": "git+https://github.com/ChaudaryHammad/mern-stack-authentication-boilerplate.git"
   }
-
 }
