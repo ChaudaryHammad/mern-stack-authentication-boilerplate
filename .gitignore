@@ -3,3 +3,6 @@ node_modules/
 
 # Ignore .env file inside backend/config
 config/.env
+
+# Ignore .env file inside config
+.env
