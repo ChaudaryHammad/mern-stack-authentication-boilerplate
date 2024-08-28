@@ -1,6 +1,6 @@
 {
   "name": "mernstack-auth-boilerplate",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A full-stack authentication boilerplate with email verification support for Node.js applications.",
   "main": "index.js",
   "files": [
