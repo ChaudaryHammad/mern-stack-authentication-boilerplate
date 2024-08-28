@@ -3,6 +3,11 @@
   "version": "1.0.1",
   "description": "A full-stack authentication boilerplate with email verification support for Node.js applications.",
   "main": "index.js",
+  "files": [
+    "backend/",
+    ".env.example",
+    "README.md"
+  ],
   "scripts": {
     "start": "node backend/index.js",
     "dev": "nodemon backend/index.js",
@@ -35,10 +40,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChaudaryHammad/mern-stack-authentication-boilerplate.git"
-  },
-  "files": [
-    "backend",
-    "README.md",
-    "package.json"
-  ]
+  }
 }
