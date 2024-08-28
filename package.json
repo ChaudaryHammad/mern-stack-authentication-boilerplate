@@ -1,14 +1,15 @@
 {
   "name": "auth",
   "version": "1.0.0",
-  "description": "full stack auth boilerplate",
+  "description": "A full-stack authentication boilerplate with email verification support for Node.js applications.",
   "main": "index.js",
   "scripts": {
     "start": "node backend/index.js",
-    "dev": "nodemon backend/index.js"
+    "dev": "nodemon backend/index.js",
+     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
-  "author": "hammad",
+  "author": "Muhmmad Hammad",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -22,5 +23,18 @@
     "mongoose": "^8.5.2",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4"
+  },
+  "keywords": [
+    "authentication",
+    "email verification",
+    "node.js",
+    "express",
+    "mongoose",
+    "jwt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChaudaryHammad/mern-stack-authentication-boilerplate"
   }
+
 }

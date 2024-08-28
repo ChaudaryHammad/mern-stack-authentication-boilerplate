@@ -1,25 +1,59 @@
-import nodemailer from 'nodemailer';
+import generateEmailTemplate from "./Emails/generateEmailTemplate.js";
+import transporter from "./Emails/transporter.js";
 
- const sendEmail = async (options) => {
-    const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
-        auth: {
-            user: process.env.SMTP_EMAIL,
-            pass: process.env.SMTP_PASSWORD
-        }
-    });
+export const sendSignUpEmail = async (name, email, token) => {
+  const signUpMessage = generateEmailTemplate("signup", {
+    name,
+    token,
+  });
 
-    const message = {
-        from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
-        to: options.email,
-        subject: options.subject,
-        text: options.message,
-        html:options.html
-    };
+  await transporter({
+    email,
+    subject: "Email Verification",
+    message: `Your verification code is ${token}. Please use this code to verify your account.`, // Text content
+    html: signUpMessage,
+  });
+};
 
-    await transporter.sendMail(message);
+export const sendVerificationEmail = async (name, email) => {
+  const verificationMessage = generateEmailTemplate("Welcome", {
+    name,
+    email,
+  });
 
-}
+  await transporter({
+    email,
+    subject: "Welcome",
+    message: "Welcome to RUNO",// You can customize this message acccording to your App Name 
+    html: verificationMessage,
+  });
+};
 
-export default sendEmail;
+export const sendPasswordResetEmail = async (name, email, url) => {
+  const resetMessage = generateEmailTemplate("Reset", {
+    name,
+    email,
+    url,
+  });
+
+  await transporter({
+    email,
+    subject: "Reset Password",
+    message: "Reset Password Request",
+    html: resetMessage,
+  });
+};
+
+export const sendPasswordResetSuccessFull = async (name, email) => {
+  const successMessage = generateEmailTemplate("Reset Success", {
+    name,
+    email,
+  });
+
+  await transporter({
+    email,
+    subject: "Reset Successfull",
+    message: "Welcome to RUNO", // You can customize this message acccording to your App Name
+    html: successMessage,
+  });
+};
