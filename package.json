@@ -1,19 +1,19 @@
 {
   "name": "mernstack-auth-boilerplate",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A full-stack authentication boilerplate with email verification support for Node.js applications.",
   "main": "index.js",
- "files": [
-  "config/",
-  "controller/",
-  "database/",
-  "middleware/",
-  "models/",
-  "routes/",
-  "utils/",
-  "index.js",
-  "README.md"
-],
+  "files": [
+    "config/",
+    "controller/",
+    "database/",
+    "middleware/",
+    "models/",
+    "routes/",
+    "utils/",
+    "index.js",
+    "README.md"
+  ],
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -30,6 +30,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mernstack-auth-boilerplate": "file:mernstack-auth-boilerplate-1.0.2.tgz",
     "mongoose": "^8.5.2",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4"

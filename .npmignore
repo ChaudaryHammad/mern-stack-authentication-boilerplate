@@ -2,3 +2,5 @@ node_modules/
 .git/
 *.log
 *.test.js
+package-lock.json
+*.tgz
