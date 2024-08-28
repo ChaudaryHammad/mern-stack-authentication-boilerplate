@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config({
-  path: "backend/config/.env",
+  path: "config/.env",
 });
 import cookieParser from "cookie-parser";
 import { connectDB } from "./database/connection.js";
