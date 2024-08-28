@@ -6,4 +6,4 @@ config/.env
 
 # Ignore .env file inside config
 .env
-config
+config/
